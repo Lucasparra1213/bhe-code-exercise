@@ -1,23 +1,22 @@
 class Sieve {
 
   NthPrime(n) {
-    console.log (`finding the ${n}th prime`);
+    
     if (n < 0) throw new Error("Invalid input: n must be a non-negative integer");
     if (n === 0) return 2; // First prime is always 2
 
 
     let limit = this.estimateUpperLimit(n);   // call estimateUpperLimit method to find the upper limit estimate for the nth prime
-    console.log (`estimate upper limit ${limit}`);
-
     return this.segmentedSieve(limit, n);
+    
+
   }
 
   
   segmentedSieve(limit, targetIndex) {
     const segmentSize = Math.floor(Math.sqrt(limit)) + 1; //This will round down the square root of the limit and will dictate the size of the small sieve
-    console.log(`the segment size is ${segmentSize}`)
     const smallSieve = this.sieveOfEratosthenes(segmentSize); // Get small primes
-    console.log(`the small sieve is ${smallSieve}`);
+
 
     let primes = [...smallSieve]; // Store found primes
     let low = segmentSize, high = 2 * segmentSize;
@@ -38,7 +37,7 @@ class Sieve {
 
       for (let i = 0; i < segmentSize && low + i < limit; i++) {       // Collect primes from this segment
         if (sieve[i]) primes.push(low + i);
-        //console.log(primes);
+
       }
 
 
@@ -80,8 +79,7 @@ class Sieve {
 
 
 const sieve = new Sieve();
-//used for case testing beside the requirements
-//console.log (sieve.NthPrime(19));
+
 
 
 
